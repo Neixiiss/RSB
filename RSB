@@ -1,0 +1,30 @@
+pip3 install -U tensorflow keras opencv-python
+pip install imageai --upgrade
+
+1. Create ReallySmartBrain folder with >
+
+brain.py
+house.jpg
+car.jpg
+flower.jpg
+
+2. In brain.py >
+
+from imageai.Classification import ImageClassification
+import os
+
+execution_path = os.getcwd()
+
+prediction = ImageClassification()
+prediction.setModelTypeAsSqueezeNet()
+prediction.setModelPath(os.path.join(execution_path, "squeezenet_weights_tf_dim_ordering_tf_kernela.h5"))
+prediction.loadModel()
+
+predictions, probabilities = prediction.classifyImage(os.path.join(execution_path, "house.jpg"), result_count=5 )
+for eachPrediction, eachProbability in zip(predictions, probabilities):
+    print(eachPrediction , " : " , eachProbability)
+
+2.1 Download Squeezenet and copy it to project folder
+
+3. Run in command line >
+python brain.py 
